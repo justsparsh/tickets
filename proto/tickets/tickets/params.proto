@@ -1,0 +1,15 @@
+syntax = "proto3";
+package tickets.tickets;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "tickets/x/tickets/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "tickets/x/tickets/Params";
+  option (gogoproto.equal) = true;
+
+  
+}

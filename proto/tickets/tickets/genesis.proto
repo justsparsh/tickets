@@ -1,0 +1,17 @@
+syntax = "proto3";
+package tickets.tickets;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "tickets/tickets/params.proto";
+
+option go_package = "tickets/x/tickets/types";
+
+// GenesisState defines the tickets module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
