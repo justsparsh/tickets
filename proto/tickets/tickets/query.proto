@@ -25,6 +25,12 @@ service Query {
     option (google.api.http).get = "/tickets/tickets/show_ticket/{id}";
   
   }
+  
+  // Queries a list of ListTickets items.
+  rpc ListTickets (QueryListTicketsRequest) returns (QueryListTicketsResponse) {
+    option (google.api.http).get = "/tickets/tickets/list_tickets";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -41,6 +47,12 @@ message QueryShowTicketRequest {
 }
 
 message QueryShowTicketResponse {
-  Ticket ticket = 1;
+  Ticket ticket = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListTicketsRequest {}
+
+message QueryListTicketsResponse {
+  repeated Ticket ticket = 1 [(gogoproto.nullable) = false];
 }
 

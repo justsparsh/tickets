@@ -23,5 +23,5 @@ func (k Keeper) ShowTicket(goCtx context.Context, req *types.QueryShowTicketRequ
 		return nil, sdkerrors.ErrKeyNotFound
 	}
 
-	return &types.QueryShowTicketResponse{Ticket: &ticket}, nil
+	return &types.QueryShowTicketResponse{Ticket: ticket}, nil
 }
