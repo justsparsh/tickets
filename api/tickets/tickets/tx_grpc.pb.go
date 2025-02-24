@@ -21,6 +21,9 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	Msg_UpdateParams_FullMethodName = "/tickets.tickets.Msg/UpdateParams"
+	Msg_CreateTicket_FullMethodName = "/tickets.tickets.Msg/CreateTicket"
+	Msg_UpdateTicket_FullMethodName = "/tickets.tickets.Msg/UpdateTicket"
+	Msg_DeleteTicket_FullMethodName = "/tickets.tickets.Msg/DeleteTicket"
 )
 
 // MsgClient is the client API for Msg service.
@@ -30,6 +33,9 @@ type MsgClient interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
+	CreateTicket(ctx context.Context, in *MsgCreateTicket, opts ...grpc.CallOption) (*MsgCreateTicketResponse, error)
+	UpdateTicket(ctx context.Context, in *MsgUpdateTicket, opts ...grpc.CallOption) (*MsgUpdateTicketResponse, error)
+	DeleteTicket(ctx context.Context, in *MsgDeleteTicket, opts ...grpc.CallOption) (*MsgDeleteTicketResponse, error)
 }
 
 type msgClient struct {
@@ -49,6 +55,33 @@ func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts 
 	return out, nil
 }
 
+func (c *msgClient) CreateTicket(ctx context.Context, in *MsgCreateTicket, opts ...grpc.CallOption) (*MsgCreateTicketResponse, error) {
+	out := new(MsgCreateTicketResponse)
+	err := c.cc.Invoke(ctx, Msg_CreateTicket_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) UpdateTicket(ctx context.Context, in *MsgUpdateTicket, opts ...grpc.CallOption) (*MsgUpdateTicketResponse, error) {
+	out := new(MsgUpdateTicketResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdateTicket_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DeleteTicket(ctx context.Context, in *MsgDeleteTicket, opts ...grpc.CallOption) (*MsgDeleteTicketResponse, error) {
+	out := new(MsgDeleteTicketResponse)
+	err := c.cc.Invoke(ctx, Msg_DeleteTicket_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -56,6 +89,9 @@ type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
+	CreateTicket(context.Context, *MsgCreateTicket) (*MsgCreateTicketResponse, error)
+	UpdateTicket(context.Context, *MsgUpdateTicket) (*MsgUpdateTicketResponse, error)
+	DeleteTicket(context.Context, *MsgDeleteTicket) (*MsgDeleteTicketResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -65,6 +101,15 @@ type UnimplementedMsgServer struct {
 
 func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateParams not implemented")
+}
+func (UnimplementedMsgServer) CreateTicket(context.Context, *MsgCreateTicket) (*MsgCreateTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTicket not implemented")
+}
+func (UnimplementedMsgServer) UpdateTicket(context.Context, *MsgUpdateTicket) (*MsgUpdateTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTicket not implemented")
+}
+func (UnimplementedMsgServer) DeleteTicket(context.Context, *MsgDeleteTicket) (*MsgDeleteTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTicket not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -97,6 +142,60 @@ func _Msg_UpdateParams_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CreateTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateTicket)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreateTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_CreateTicket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreateTicket(ctx, req.(*MsgCreateTicket))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_UpdateTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateTicket)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdateTicket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateTicket(ctx, req.(*MsgUpdateTicket))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DeleteTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteTicket)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeleteTicket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteTicket(ctx, req.(*MsgDeleteTicket))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -107,6 +206,18 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateParams",
 			Handler:    _Msg_UpdateParams_Handler,
+		},
+		{
+			MethodName: "CreateTicket",
+			Handler:    _Msg_CreateTicket_Handler,
+		},
+		{
+			MethodName: "UpdateTicket",
+			Handler:    _Msg_UpdateTicket_Handler,
+		},
+		{
+			MethodName: "DeleteTicket",
+			Handler:    _Msg_DeleteTicket_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

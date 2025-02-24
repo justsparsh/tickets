@@ -28,6 +28,24 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
+				{
+					RpcMethod:      "CreateTicket",
+					Use:            "create-ticket [name] [event]",
+					Short:          "Send a create-ticket tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "event"}},
+				},
+				{
+					RpcMethod:      "UpdateTicket",
+					Use:            "update-ticket [name] [event] [id]",
+					Short:          "Send a update-ticket tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "event"}, {ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "DeleteTicket",
+					Use:            "delete-ticket [id]",
+					Short:          "Send a delete-ticket tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

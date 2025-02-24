@@ -1,0 +1,11 @@
+syntax = "proto3";
+package tickets.tickets;
+
+option go_package = "tickets/x/tickets/types";
+
+message Ticket {
+  
+  string name = 1; 
+  string event = 2; 
+  string id = 3; 
+}
