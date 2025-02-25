@@ -50,7 +50,10 @@ message QueryShowTicketResponse {
   Ticket ticket = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryListTicketsRequest {}
+message QueryListTicketsRequest {
+  string name = 1;
+  string event = 2;
+}
 
 message QueryListTicketsResponse {
   repeated Ticket ticket = 1 [(gogoproto.nullable) = false];

@@ -5,9 +5,10 @@ import (
 
 	"tickets/x/tickets/types"
 
-	// sdk "github.com/cosmos/cosmos-sdk/types"
 	"cosmossdk.io/store/prefix"
 	"github.com/cosmos/cosmos-sdk/runtime"
+
+	// sdk "github.com/cosmos/cosmos-sdk/types"
 
 	// "github.com/cosmos/cosmos-sdk/types/query"
 	"google.golang.org/grpc/codes"
@@ -34,6 +35,15 @@ func (k Keeper) ListTickets(goCtx context.Context, req *types.QueryListTicketsRe
 		if err := k.cdc.Unmarshal(iterator.Value(), &ticket); err != nil {
 			return nil, status.Error(codes.Internal, err.Error())
 		}
+
+		if req.Name != "" && ticket.Name != req.Name {
+			continue
+		}
+
+		if req.Event != "" && ticket.Event != req.Event {
+			continue
+		}
+
 		tickets = append(tickets, ticket)
 	}
 
