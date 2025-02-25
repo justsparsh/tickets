@@ -12,6 +12,7 @@ import (
 func (k Keeper) AppendTicket(ctx sdk.Context, ticket types.Ticket) string {
 	id := uuid.NewString()
 	ticket.Id = id
+	ticket.CreatedAt = ctx.BlockTime().Unix()
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.TicketKey))
 	appendedValue := k.cdc.MustMarshal(&ticket)

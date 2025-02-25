@@ -7,5 +7,6 @@ message Ticket {
   
   string name = 1; 
   string event = 2; 
-  string id = 3; 
+  string id = 3;
+  int64 createdAt = 4; 
 }
