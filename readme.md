@@ -40,8 +40,8 @@ TICKETS_PATH q tickets show-ticket $ID
 TICKETS_PATH tx tickets update-ticket $NAME $EVENT $ID --from alice
 ```
 
-## DELETE a Ticket
+## Delete a Ticket
 
 ```
-TICKETS_PATH tx tickets update-ticket $NAME $EVENT $ID --from alice
+TICKETS_PATH tx tickets delete-ticket $NAME $EVENT $ID --from alice
 ```
