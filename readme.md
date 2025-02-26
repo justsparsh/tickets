@@ -1,51 +1,21 @@
-# tickets
-**tickets** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
+# Blockchain Consensus Mechanism
 
-## Get started
+Blockchains are maintained through a "consensus" mechanism, where all nodes must agree upon the state of the blockchain at all times. This ensures that all participants in the network maintain an identical view of the blockchain state.
 
-```
-ignite chain serve
-```
+## Consensus Process
 
-`serve` command installs dependencies, builds, initializes, and starts your blockchain in development.
+When a transaction is accepted, each node calculates a new state for the blockchain and seeks "consensus" with other nodes. The consensus process involves the following steps:
 
-### Configure
+1. **Transaction Validation:** Nodes validate incoming transactions based on predefined rules.
+2. **State Calculation:** Each node computes a new state after applying the validated transactions.
+3. **Consensus:** Nodes compare their computed state and seek agreement on the blockchain's state.
 
-Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
+## Consensus-Breaking Changes
 
-### Web Frontend
+In some scenarios, changes to the blockchain can break consensus. A **consensus-breaking change** occurs when nodes calculate different states from the same set of transactions.
 
-Additionally, Ignite CLI offers both Vue and React options for frontend scaffolding:
+### Adding Fields to Resources
 
-For a Vue frontend, use: `ignite scaffold vue`
-For a React frontend, use: `ignite scaffold react`
-These commands can be run within your scaffolded blockchain project. 
+ My change is that a new field is added to the `Ticket` resource, nodes running older versions of the blockchain software will not be aware of this new field. As a result, they will not hash this new field, leading to a different state calculation compared to nodes that have visibility of the new field.
 
-
-For more information see the [monorepo for Ignite front-end development](https://github.com/ignite/web).
-
-## Release
-To release a new version of your blockchain, create and push a new tag with `v` prefix. A new draft release with the configured targets will be created.
-
-```
-git tag v0.1
-git push origin v0.1
-```
-
-After a draft release is created, make your final changes from the release page and publish it.
-
-### Install
-To install the latest version of your blockchain node's binary, execute the following command on your machine:
-
-```
-curl https://get.ignite.com/username/tickets@latest! | sudo bash
-```
-`username/tickets` should match the `username` and `repo_name` of the Github repository to which the source code was pushed. Learn more about [the install process](https://github.com/allinbits/starport-installer).
-
-## Learn more
-
-- [Ignite CLI](https://ignite.com/cli)
-- [Tutorials](https://docs.ignite.com/guide)
-- [Ignite CLI docs](https://docs.ignite.com)
-- [Cosmos SDK docs](https://docs.cosmos.network)
-- [Developer Chat](https://discord.gg/ignite)
+This inconsistency can cause the blockchain to fork, where nodes diverge into different versions of the chain with conflicting states.
